@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Library to perform the Kaplan-Meier Survival Analysis.}
   spec.description   = %q{Evolving library to support analysing data for subjects with brain tumours, and driving graphical representations.}
-  spec.homepage      = "https://github.com/seigel/kaplan_meier"
+  spec.homepage      = "https://seigel.github.io/kaplan-meier/"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
