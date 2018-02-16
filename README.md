@@ -36,7 +36,7 @@ TODO: Improve these but taking the example data and results from graphpad, here 
  # it is using named parameters.
   
 
-km = KaplanMeier.new
+km = KaplanMeier::Survival.new
 km.add(46, 1, 1)
 km.add(64, 0, 1)
 km.add(78)
