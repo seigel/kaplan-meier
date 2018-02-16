@@ -57,7 +57,7 @@ Use it to drive creating graphs like this using a charting library.
 
 
 
-![Survival Curve](https://d.pr/i/VKI4H6)
+![Survival Curve](https://d.pr/i/VKI4H6+?height=400px)
 
 ## Development
 
