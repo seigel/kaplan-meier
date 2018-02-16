@@ -1,7 +1,5 @@
 # KaplanMeier
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kaplan_meier`. To experiment with that code, run `bin/console` for an interactive prompt.
-
 This current intent of this library is to support doing a Kaplan-Meier Survival Analysis and generating survival plots for subjects that have a brain tumour diagnosis.  This is in support of research being conducted to help create better treatments and improve outcomes.
 
 This does not mean it is only useful for that, but it is the initial driver of the interface for better or for worse.
