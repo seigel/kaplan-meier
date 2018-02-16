@@ -41,12 +41,12 @@ TODO: Improve these but taking the example data and results from graphpad, here 
   
 
 km = KaplanMeier.new
-km.add_time(46, 1, 1)
-km.add_time(64, 0, 1)
-km.add_time(78)
-km.add_time(124)
-km.add_time(130, 0, 1)
-km.add_time(150, 0, 2)
+km.add(46, 1, 1)
+km.add(64, 0, 1)
+km.add(78)
+km.add(124)
+km.add(130, 0, 1)
+km.add(150, 0, 2)
 
 km.raw_probabilities
 km.raw_probabilities(as_percent: true)

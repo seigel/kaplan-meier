@@ -4,11 +4,16 @@ module KaplanMeier
   class Survival
 
     def initialize
-      @data = []
+      @data = {}
     end
 
-    def add_time(time, event_count = 1, censored_count = 0)
-      @data << KaplanMeierCoord.new(time, event_count, censored_count)
+    def add(time, event_count = 1, censored_count = 0)
+      leaf = @data[time]
+      if leaf.nil?
+        @data[time] = KaplanMeierCoord.new(time, event_count, censored_count)
+      else
+        leaf.add_count(event_count: event_count, censored_count: censored_count)
+      end
     end
 
     def initial_at_risk_count
@@ -16,22 +21,22 @@ module KaplanMeier
     end
 
     def time_periods
-      self.to_a.map {|i| i[:time_point]}.uniq.sort
+      @data.keys.sort
     end
 
     def to_a
-      @data.map do |kmc|
-        kmc.to_a
+      @data.keys.sort.map do |k|
+        @data[k].to_a
       end.flatten
     end
 
     def raw_probabilities(as_percent: false)
-      return [] if @data.length < 1
+      return [] if @data.keys.length < 1
       self.probabilities.map {|i| as_percent ? (i[:probability] * 100.0).round(2) : i[:probability]}
     end
 
     def probabilities(as_percent: false)
-      return [] if @data.length < 1
+      return [] if @data.keys.length < 1
       result = [{time: 0, probability: 1}]
       time_points = self.to_a
       n = time_points.length
@@ -48,7 +53,7 @@ module KaplanMeier
     end
 
     def values_for_range(start_time: 0, end_time: nil, as_percent: false)
-      return [] if @data.length < 1
+      return [] if @data.keys.length < 1
       result = []
       range_array = range(start_time: start_time, end_time: end_time)
       periods = probabilities(as_percent: as_percent)
@@ -67,11 +72,25 @@ module KaplanMeier
 
   end
 end
+
 class KaplanMeierCoord
   def initialize(time_point, event_count = 1, censored_count = 0)
     @time_point = time_point
     @event_count = event_count
     @censored_count = censored_count
+  end
+
+  def add_event_count(event_count)
+    @event_count += event_count
+  end
+
+  def add_censored_count(censored_count)
+    @censored_count += censored_count
+  end
+
+  def add_count(event_count: 0, censored_count: 0)
+    add_event_count(event_count)
+    add_censored_count(censored_count)
   end
 
   def to_s
