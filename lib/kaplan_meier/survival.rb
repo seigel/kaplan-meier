@@ -37,7 +37,7 @@ module KaplanMeier
 
     def probabilities(as_percent: false)
       return [] if @data.keys.length < 1
-      result = [{time: 0, probability: 1.0}]
+      result = [{time: 0, probability: (as_percent ? 100.0 : 1.0)}]
       time_points = self.to_a
       n = time_points.length
       percent = 1.0
