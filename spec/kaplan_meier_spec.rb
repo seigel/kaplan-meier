@@ -7,7 +7,46 @@ RSpec.describe KaplanMeier::Survival do
     expect(KaplanMeier::VERSION).not_to be nil
   end
 
-  describe 'calculating values' do
+  # https://www.statsdirect.com/help/survival_analysis/kaplan_meier.htm
+
+  describe 'larger suvival analysis' do
+    let(:km) {KaplanMeier::Survival.new}
+
+    before do
+      km.add(143	, 1, 0)
+      km.add(165	, 1, 0)
+      km.add(188	, 2, 0)
+      km.add(190	, 1, 0)
+      km.add(192	, 1, 0)
+      km.add(206	, 1, 0)
+      km.add(208	, 1, 0)
+      km.add(212	, 1, 0)
+      km.add(216	, 1, 1)
+      km.add(220	, 1, 0)
+      km.add(227	, 1, 0)
+      km.add(230	, 1, 0)
+      km.add(235	, 1, 0)
+      km.add(244	, 0, 1)
+      km.add(246	, 1, 0)
+      km.add(265	, 1, 0)
+      km.add(303	, 1, 0)
+    end
+
+    it "show have the correct probability for first time point " do
+      expect(km.probabilities[1][:probability].round(6)).to eq(0.947368)
+    end
+
+    it "show have the correct probability for last time point " do
+      expect(km.probabilities[-1][:probability].round(6)).to eq(0)
+    end
+
+    it 'should hve a good graphing range' do
+      expect(km.values_for_range[188].round(6)).to eq(0.789474)
+    end
+
+  end
+
+  describe 'calculating simple values' do
     let(:km) {KaplanMeier::Survival.new}
 
     before do

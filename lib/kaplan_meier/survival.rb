@@ -37,12 +37,12 @@ module KaplanMeier
 
     def probabilities(as_percent: false)
       return [] if @data.keys.length < 1
-      result = [{time: 0, probability: 1}]
+      result = [{time: 0, probability: 1.0}]
       time_points = self.to_a
       n = time_points.length
-      percent = 1
+      percent = 1.0
       (0...n).each do |i|
-        percent = (1.0 - (time_points[i][:event].to_f / (n - i))) * percent
+        percent = (1.0 - (time_points[i][:event].to_f / (n - i))) * percent.to_f
         result << {time: time_points[i][:time_point], probability: as_percent ? (percent * 100.0).round(2) : percent}
       end
       result
