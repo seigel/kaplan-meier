@@ -32,6 +32,10 @@ RSpec.describe KaplanMeier::Survival do
       km.add(303	, 1, 0)
     end
 
+    it 'should calculate the median' do
+      expect(km.median).to eq(216)
+    end
+
     it "show have the correct probability for first time point " do
       expect(km.probabilities[1][:probability].round(6)).to eq(0.947368)
     end

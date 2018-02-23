@@ -70,6 +70,18 @@ module KaplanMeier
       result
     end
 
+    def median
+      probabilities = self.probabilities
+      result = nil
+      probabilities.each do |prob|
+        if prob[:probability] < 0.5
+          result = prob[:time]
+          break
+        end
+      end
+      result
+    end
+
   end
 end
 
