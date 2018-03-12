@@ -1,4 +1,4 @@
-# KaplanMeier
+# Kaplan Meier Library
 
 This current intent of this library is to support doing a Kaplan-Meier Survival Analysis and generating survival plots for subjects that have a brain tumour diagnosis.  This is in support of research being conducted to help create better treatments and improve outcomes.
 
